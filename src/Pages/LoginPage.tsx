@@ -3,10 +3,10 @@ import LoginComponent, { LoginForm } from '../Components/Authorize/LoginComponen
 
 const LoginPage = () => {
 	const { loginForm } = useParams<{ loginForm: keyof typeof LoginForm }>();
-	let formType: LoginForm = GetForm(loginForm!);
+	let formType = LoginForm.Login;
 
-	if (formType === undefined) {
-		formType = LoginForm.Login;
+	if (loginForm !== undefined) {
+		formType = GetForm(loginForm!);
 	}
 
 	return <LoginComponent form={formType} />;
