@@ -1,5 +1,6 @@
 @import './Login';
-
+@import './SignUp';
+@import './Forgot';
 .auth-window {
 	border: #afafaf solid 1px;
 	margin: auto;
@@ -52,23 +53,7 @@
 	border-radius: 302px;
 	position: absolute;
 }
-#ellipse-1 {
-	right: 24%;
-	top: 26px;
-	width: 302px;
-	height: 302px;
-	transform: rotate(-28.5deg);
-	flex-shrink: 0;
-}
-#ellipse-2 {
-	width: 302px;
-	flex-shrink: 0;
-	width: 220px;
-	height: 220px;
-	bottom: -3px;
-	right: 4%;
-	background: linear-gradient(180deg, #300061 0%, #0a1030 100%);
-}
+
 #big-label {
 	color: #fff;
 	font-size: 36px;
@@ -90,12 +75,12 @@
 	border-radius: 12px;
 	border: 1px solid #fff;
 	background: transparent;
+	font-size: 1.25rem;
 	color: white;
 	&::placeholder {
 		color: #fff;
 	}
-	&:focus {
-	}
+
 	&:focus-visible {
 		border: 1px solid #fff !important;
 
@@ -114,7 +99,7 @@
 	background: transparent;
 	text-align: center;
 	color: #fff;
-
+	text-decoration: none;
 	font-size: 32px;
 	font-style: italic;
 	font-weight: 600;
