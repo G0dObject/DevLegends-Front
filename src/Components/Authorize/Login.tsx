@@ -1,10 +1,27 @@
+import { useRef } from 'react';
 import { Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import facebook from '../../Image/facebook.svg';
+import { store } from '../..';
 import github from '../../Image/github.svg';
 import google from '../../Image/google.svg';
-
+import microsoft from '../../Image/microsoft.svg';
 export const Login = () => {
+	const authPath = process.env.REACT_APP_AUTH_URL as string;
+
+	const usernameref = useRef<HTMLInputElement>(null);
+	const passwordref = useRef<HTMLInputElement>(null);
+
+	const sendLoginRequest = () => {
+		var username = usernameref!.current!.value;
+		var password = passwordref!.current!.value;
+
+		console.log(username, password);
+
+		store.login({ username, password }).then((res) => {
+			console.log(res);
+		});
+	};
+
 	return (
 		<>
 			<div className="d-flex flex-column auth-text ">
@@ -14,7 +31,7 @@ export const Login = () => {
 					</h1>
 
 					<div>
-						<Link className="mt-3 mx-auto link-button" to={'signup'}>
+						<Link className="mt-3 mx-auto link-button" to={'/login/signup'}>
 							Not Register ?
 						</Link>
 					</div>
@@ -25,11 +42,21 @@ export const Login = () => {
 					<h3 id="big-label">Login</h3>
 					<h5 className="mb-4	">Glad you’re back !</h5>
 					<Form.Group className="mb-3" controlId="formBasicUsername">
-						<input className="field" type="username" placeholder="Username" />
+						<input
+							ref={usernameref}
+							className="field"
+							type="username"
+							placeholder="Username"
+						/>
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicPassword">
-						<input className="field" type="password" placeholder="Password" />
+						<input
+							ref={passwordref}
+							className="field"
+							type="password"
+							placeholder="Password"
+						/>
 					</Form.Group>
 
 					<Form.Group className="mb-3" controlId="formBasicCheckbox">
@@ -41,6 +68,10 @@ export const Login = () => {
 					</Form.Group>
 
 					<Button
+						onClick={(event) => {
+							event.preventDefault();
+							sendLoginRequest();
+						}}
 						variant="primary"
 						type="submit"
 						id="button-login"
@@ -57,9 +88,18 @@ export const Login = () => {
 					</p>
 					<div className="mt-4" style={{ borderTop: '3px solid #4D4D4D' }}></div>
 					<div className="mx-auto d-flex justify-content-center gap-3 mt-3">
-						<img src={google}></img>
-						<img src={github}></img>
-						<img src={facebook}></img>
+						<a
+							href={`${authPath}/ExternalAuth?provider=Google&returnUrl=https://localhost:3000`}>
+							<img src={google}></img>
+						</a>
+
+						<a
+							href={`${authPath}/ExternalAuth?provider=GitHub&returnUrl=https://localhost:3000`}>
+							<img src={github}></img>
+						</a>
+						<a href={``}>
+							<img src={microsoft}></img>
+						</a>
 					</div>
 				</Form>
 			</div>

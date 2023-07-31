@@ -1,4 +1,5 @@
 import { useParams } from 'react-router-dom';
+import { store } from '..';
 import LoginComponent, { LoginForm } from '../Components/Authorize/LoginComponent';
 
 const LoginPage = () => {
@@ -8,8 +9,7 @@ const LoginPage = () => {
 	if (loginForm !== undefined) {
 		formType = GetForm(loginForm!);
 	}
-
-	return <LoginComponent form={formType} />;
+	return store.isAuth ? <>auth</> : <LoginComponent form={formType} />;
 };
 
 function GetForm(str: string) {

@@ -1,5 +1,6 @@
 import * as mobx from "mobx";
 import { makeAutoObservable } from "mobx";
+import { IExternalLogin } from "../Core/Interfaces/Auth/IExternalLogin";
 import { ILogin } from "../Core/Interfaces/Auth/ILogin";
 import { IUser } from "../Core/Interfaces/Auth/IUser";
 import AuthService from "../Service/AuthService";
@@ -19,7 +20,10 @@ export default class Store {
 	setUser(user: IUser) {
 		this.user = user;
 	}
-
+	setToken(token: string) {
+		this.user.token = token;
+		this.isAuth = true;
+	}
 	load() {
 		if (localStorage.getItem("store") != null) {
 			const data: any = localStorage.getItem("store");
@@ -48,9 +52,12 @@ export default class Store {
 			if (response.status == 400) {
 				console.log(400)
 			}
-			this.setAuth(true);
-			this.setUser(response.data );
-			window.location.href = "/admin";
+			if (response.status == 200) {
+				this.setAuth(true);
+				this.setUser(response.data);
+				window.location.href = "/";
+			}
+			
 			return response.status
 		} catch (e: any) {			
 			console.log(e.response?.data?.message);

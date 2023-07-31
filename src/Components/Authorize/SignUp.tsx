@@ -14,7 +14,7 @@ export const SignUp = () => {
 					</h1>
 
 					<div>
-						<Link className="mt-3 mx-auto link-button" to={'../login'}>
+						<Link className="mt-3 mx-auto link-button" to={'/login'}>
 							Already Registered?
 						</Link>
 					</div>

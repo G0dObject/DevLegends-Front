@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 export const store = new Store();
 export const Context = createContext(store);
-
+console.log(process.env.REACT_APP_AUTH_URL);
 root.render(
 	<Context.Provider value={store}>
 		<App />
