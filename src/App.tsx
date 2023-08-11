@@ -6,7 +6,7 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/token/:token" element={<TokenHanderPage />}></Route>
+				<Route path="/auth/:token" element={<TokenHanderPage />}></Route>
 				<Route path="/" element={<LoginPage />}></Route>
 				<Route path="/login" element={<LoginPage />}></Route>
 				<Route path="/login/:loginForm" element={<LoginPage />}></Route>

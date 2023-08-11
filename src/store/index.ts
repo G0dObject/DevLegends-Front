@@ -45,7 +45,7 @@ export default class Store {
 		localStorage.setItem("store", json);
 	}
 
-	async login(props: ILogin) {		
+	async login(props: ILogin) {
 		try {
 			const response = await AuthService.login(props);
 			console.log(response)
@@ -57,15 +57,15 @@ export default class Store {
 				this.setUser(response.data);
 				window.location.href = "/";
 			}
-			
+
 			return response.status
-		} catch (e: any) {			
+		} catch (e: any) {
 			console.log(e.response?.data?.message);
 			return e.response.status
 		}
 	}
 	async logout() {
-		try {		
+		try {
 			this.setAuth(false);
 			this.setUser({});
 			window.location.reload();

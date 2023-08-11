@@ -1,14 +1,17 @@
-import { useParams } from 'react-router-dom';
-import { store } from '..';
+import { useParams } from "react-router-dom";
+import { store } from "..";
+import { useEffect } from "react";
 
 const TokenHanderPage = () => {
-	const { token } = useParams();
+  const { token } = useParams();
+  useEffect(() => {
+    if (token) {
+      store.setToken(token);
+      window.location.href = "/";
+    }
+  }, []);
 
-	console.log(token);
-
-	store.setToken(token as string);
-	window.location.href = '/';
-	return <></>;
+  return <></>;
 };
 
 export default TokenHanderPage;
