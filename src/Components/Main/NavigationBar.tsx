@@ -1,48 +1,35 @@
-import React, { useState } from "react";
-import { Col, Container, Nav, Navbar, Row } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { store } from "../..";
 
-const NavigationBar: React.FC = () => {
-  const [active, setActive] = React.useState("Profile");
+const NavigationBar = (props: {
+  state: string;
+  setState: React.Dispatch<React.SetStateAction<string>>;
+}) => {
   const list = ["Profile", "Party", "Clan"];
-
+  const [select, setSelect] = useState("Profile");
   return (
     <>
       <div className="d-flex flex-row">
         {list.map((item) => {
           return (
             <div className="me-2" key={item}>
-              <Link
-                className={`menu-item ${active === item ? "active" : ""}`}
-                onMouseEnter={() => setActive(item)}
-                to={"/Main/" + item}
+              <div
+                className={`menu-item ${select === item ? "active" : ""}`}
+                onMouseEnter={() => setSelect(item)}
+                onClick={() => props.setState(item)}
               >
                 {item}
-              </Link>
+              </div>
             </div>
           );
         })}
+        <div className="menu-item ml-auto" onClick={() => store.logout()}>
+          Logout
+        </div>
       </div>
+
       <div className="nav-line"></div>
     </>
-  );
-};
-
-interface NavItemProps {
-  name: string;
-  icon: string;
-  isActive: boolean;
-  onClick: (name: string) => void;
-}
-
-const NavItem: React.FC<NavItemProps> = ({ name, icon, isActive, onClick }) => {
-  return (
-    <Nav.Link onClick={() => onClick(name)}>
-      <div className={`nav-item ${isActive ? "active" : ""}`}>
-        <i className={`bi bi-${icon} nav-icon`}></i>
-        <span className="nav-label">{name}</span>
-      </div>
-    </Nav.Link>
   );
 };
 
