@@ -1,0 +1,16 @@
+.nav-line{
+  width: 100%;
+  border-bottom: 1px solid grey;
+}
+
+.menu-item{
+  color: white !important;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-decoration: none;
+  &.active{
+    border-bottom: 1px solid white;
+  }
+}
+
+
